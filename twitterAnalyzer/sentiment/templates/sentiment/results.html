@@ -1,0 +1,63 @@
+{% load static %}
+{% load sentiment_extras %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'sentiment/style.css' %}">
+
+<header>Search results for: {{search}}</header>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<a href ="{% url 'sentiment:index' %}">Return to search</a>
+
+<div class="pagination">
+    <span class="step-links">
+    
+        {% if tweets.has_previous %}
+            <a href="search/results/?page=1">&laquo; first</a>            
+            <a href="search/reslts/?page={{ tweets.previous_page_number }}">previous"</a>            
+        {% endif %}
+        
+        <span class="current">
+            Page {{ tweets.number }} of {{ tweets.paginator.num_pages}}.
+        </span>
+        
+        {% if tweets.has_next %}
+            <a href="search/results/?page={{ tweets.next_page_number }}">next</a>            
+            <a href="search/results/?page={{ tweets.paginator.num_pages }}">last &raquo;</a>            
+        {% endif %}
+    
+    </span>
+</div>    
+
+
+<table id="search_results">
+    <caption>Search Results: {{counts}} Tweets</caption>
+    <thead>
+        <tr>
+        <th>Hashtag</th>
+        <th>Mention</th>
+        <th>User Name</th>
+        <th>Tweet ID</th>
+        <th>Tweet Text</th>
+        <th>Sentiment</th>
+        <th>Time Posted</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tweet in tweets %}
+        <tr>
+            <td><a href="{{ "hashtag/detail/"|concatenate:tweet.hashtag}}" target="_blank">{{tweet.hashtag}}</a></td>
+            <td><a href ="{{ "hashtag/detail/"|concatenate:tweet.mention }}" target = "_blank">{{tweet.mention}}</a></td>
+            <td>{{tweet.user_name}}</td>            
+            <td>{{tweet.tweetkey}}</td>
+            <td>{{tweet.tweet}}</td>
+            <td>{{tweet.sentiment}}</td>
+            <td>{{tweet.time_stamp}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>complete</td>
+        </tr>
+    </tfoot>
+</table>
