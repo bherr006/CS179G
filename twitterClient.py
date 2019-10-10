@@ -18,10 +18,10 @@ logger = logging.getLogger("tweetread")
 logging.basicConfig(level=logging.INFO)
 
 #change the tokens to your own tokens from twitter app
-ACCESS_TOKEN = '982370414423818240-fqIch7MdCjQVHaYNRvAf2OvHnv6Jl9p'
-ACCESS_SECRET = 'CZQkRptlg9Bm0i0P5wfm8V2fDDg3HJnWqUHULxUdU3KBs'
-CONSUMER_KEY = 'tQRx9jl7y6NWc8OvDin9HWWNk'
-CONSUMER_SECRET = 'UqStiNRGhlFw8Ot1rpYZMrmoURidkvLoxJtObYhoZz8PvVjDYQ'
+ACCESS_TOKEN = ''
+ACCESS_SECRET = ''
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
 
 
 class TweetsListener(StreamListener):
